@@ -1,0 +1,26 @@
+ private static class DirectedGraph {
+        Map<Integer, Vertex> vertices = new HashMap<>();
+        private long diskSize;
+
+        private static class Vertex {
+            private final int fileSize;
+            private long totalMemoryRequired;
+            Set<Vertex> edges = new HashSet<>();
+
+            Vertex(int fileSize) {
+                this.fileSize = fileSize;
+            }
+
+            void addEdge(Vertex to) {
+                this.edges.add(to);
+            }
+        }
+
+        public void addVertex(int data, int fileSize) {
+            vertices.put(data, new Vertex(fileSize));
+        }
+
+        public void addEdge(int from, int to) {
+            Vertex fromVertex = vertices.get(from);
+            fromVertex.addEdge(vertices.get(to));
+            }
